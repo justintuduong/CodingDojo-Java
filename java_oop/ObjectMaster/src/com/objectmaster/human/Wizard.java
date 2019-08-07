@@ -13,3 +13,4 @@ public class Wizard extends Human {
 		System.out.println("You've fireballed another player, their health is now at " + human.health);
 	}
 }
+ 
