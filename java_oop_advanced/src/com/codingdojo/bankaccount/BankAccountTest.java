@@ -21,9 +21,6 @@ public class BankAccountTest {
 		System.out.println(BankAccount.getNumberOfAccounts());
 		
 		
-	
-		
-		
 	}
 
 }
