@@ -9,11 +9,11 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.codingdojo.hellohuman</groupId>
-	<artifactId>HelloHuman</artifactId>
+	<artifactId>DisplayDate</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
-	<name>HelloHuman</name>
-	<description>You are tasked to build a page that will greet whoever visits your page. If they don't tell you their name, then greet them as "human".</description>
+	<name>DisplayDate</name>
+	<description>Your project manager needs you to make two templates for her front-end team: one to display the current date, and one to display the current time. Use the JSTL library to format the date so the front end developers can edit easily!</description>
 
 	<properties>
 		<java.version>1.8</java.version>
@@ -41,14 +41,15 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-		       <dependency>
-                <groupId>org.apache.tomcat.embed</groupId>
-                <artifactId>tomcat-embed-jasper</artifactId>
+		<dependency>
+            <groupId>org.apache.tomcat.embed</groupId>
+            <artifactId>tomcat-embed-jasper</artifactId>
         </dependency>
         <dependency>
-                <groupId>javax.servlet</groupId>
-                <artifactId>jstl</artifactId>
+            <groupId>javax.servlet</groupId>
+            <artifactId>jstl</artifactId>
         </dependency>
+		
 	</dependencies>
 
 	<build>
