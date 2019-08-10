@@ -15,6 +15,6 @@
   			<fmt:formatDate pattern="EEEE', the 'dd' of 'MMMM, yyyy" value="${date}" />
 		</h1>
 	</div>
-</body>
     <script type="text/javascript" src="js/date.js"></script>
+</body>
 </html>
