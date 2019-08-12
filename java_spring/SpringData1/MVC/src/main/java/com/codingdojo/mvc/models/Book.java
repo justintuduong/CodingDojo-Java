@@ -55,12 +55,20 @@ public class Book {
     protected void onUpdate(){
         this.updatedAt = new Date();
     }
+    
+	public Book(String title, String description, String language, Integer numberOfPages) {
+		this.title = title;
+		this.description = description;
+		this.language = language;
+		this.numberOfPages = numberOfPages;
+	}
+	
 	public Long getId() {
 		return id;
 	}
-	public void setId(Long id) {
-		this.id = id;
-	}
+//	public void setId(Long id) {
+//		this.id = id;
+//	}
 	public String getTitle() {
 		return title;
 	}
