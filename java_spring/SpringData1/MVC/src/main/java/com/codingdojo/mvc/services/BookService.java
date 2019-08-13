@@ -3,6 +3,9 @@ package com.codingdojo.mvc.services;
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.Valid;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.codingdojo.mvc.models.Book;
@@ -12,11 +15,15 @@ import com.codingdojo.mvc.repositories.BookRepository;
 public class BookService {
 
 	// adding the book repository as a dependency
-	private final BookRepository bookRepository;
+//	private final BookRepository bookRepository;
+//
+//	public BookService(BookRepository bookRepository) {
+//	this.bookRepository = bookRepository;
 
-	public BookService(BookRepository bookRepository) {
-		this.bookRepository = bookRepository;
-	}
+	@Autowired
+	BookRepository bookRepository;
+
+//	}
 
 	// returns all the books
 	public List<Book> allBooks() {
@@ -38,10 +45,11 @@ public class BookService {
 		return bookRepository.save(b);
 	}
 
+	//
 	public Book updateBook(Long id, String title, String desc, String lang, Integer numOfPages) {
 		Optional<Book> book = bookRepository.findById(id);
-		
-		if(book.isPresent()) {
+
+		if (book.isPresent()) {
 			Book update = book.get();
 			update.setTitle(title);
 			update.setDescription(desc);
@@ -57,4 +65,9 @@ public class BookService {
 		return;
 
 	}
+
+	public void updateBook(@Valid Book book) {
+		bookRepository.save(book);
+	}
+
 }
