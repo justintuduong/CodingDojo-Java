@@ -23,10 +23,18 @@ public class BooksApi {
 	@Autowired 
 	BookService bookService;
     
+//  ----------------------------------------------------------------
+//  show all
+//  ----------------------------------------------------------------
+	
     @RequestMapping("/api/books")
     public List<Book> index() {
         return bookService.allBooks();
     }
+    
+//  ----------------------------------------------------------------
+//  create
+//  ----------------------------------------------------------------
     
     @RequestMapping(value="/api/books", method=RequestMethod.POST)
     public Book create(@RequestParam(value="title") String title, @RequestParam(value="description") String desc, @RequestParam(value="language") String lang, @RequestParam(value="pages") Integer numOfPages) {
@@ -34,17 +42,27 @@ public class BooksApi {
         return bookService.createBook(book);
     }
     
+//  ----------------------------------------------------------------
+//  find by id
+//  ----------------------------------------------------------------
     @RequestMapping("/api/books/{id}")
     public Book show(@PathVariable("id") Long id) {
         Book book = bookService.findBook(id);
         return book;
     }
     
+//  ----------------------------------------------------------------
+//  edit 
+//  ----------------------------------------------------------------
     @RequestMapping(value="/api/books/{id}", method=RequestMethod.PUT)
     public Book update(@PathVariable("id") Long id, @RequestParam(value="title") String title, @RequestParam(value="description") String desc, @RequestParam(value="language") String lang, @RequestParam(value="pages") Integer numOfPages) {
         Book book = bookService.updateBook(id, title, desc, lang, numOfPages);
         return book;
     }
+    
+//  ----------------------------------------------------------------
+//  delete
+//  ----------------------------------------------------------------
     
     @RequestMapping(value="/api/books/{id}", method=RequestMethod.DELETE)
     public void destroy(@PathVariable("id") Long id) {
