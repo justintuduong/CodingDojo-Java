@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.codingdojo.languages.models.Language;
@@ -87,7 +88,7 @@ public class LanguagesController {
 // ----------------------------------------------------------------
 // process edit
 // ----------------------------------------------------------------
-	@PostMapping("/{id}")
+	@PutMapping("/{id}")
 	public String update(@Valid @ModelAttribute("language") Language language, BindingResult result) {
 		if (result.hasErrors()) {
 			return "/languages/edit.jsp";

@@ -22,9 +22,10 @@
 
 	<a href="/languages/${language.id}/edit">Edit Language</a>
 	<form action="/languages/${language.id}" method="post">
-		<input type="hidden" name="_method" value="delete"> <input
-			type="submit" value="Delete">
+		<input type="hidden" name="_method" value="delete"> 
+		<input type="submit" value="Delete">
 	</form>
 
+<a href="/languages">Dashboard</a>
 </body>
 </html>

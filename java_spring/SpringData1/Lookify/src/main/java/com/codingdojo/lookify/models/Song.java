@@ -1,4 +1,4 @@
-package com.codingdojo.languages.models;
+package com.codingdojo.lookify.models;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -15,30 +15,30 @@ import javax.validation.constraints.Size;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
-@Table(name = "languages")
-public class Language {
+@Table(name = "songs") //convention is plural for table name
+public class Song {
 
 //------------------------------------------------------------------------------------
-// Languages Table
+// Songs Table
 //------------------------------------------------------------------------------------
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-
-	@Size(min = 2, max = 20)
+	
+	@Size(min = 2, max = 255, message="requires at least 2 characters.")
 	private String name;
-
-	@Size(min = 2, max = 20)
-	private String creator;
-
+	
+	@Size(min = 2, max = 255, message="requires at least 2 characters.")
+	private String artist;
+	
 	@NotNull
-	private String version;
-	
-//------------------------------------------------------------------------------------
+	private Integer rating;
+
+// ------------------------------------------------------------------------------------
 // createdAt and updatedAt
-//------------------------------------------------------------------------------------
-	
+// ------------------------------------------------------------------------------------
+
 	@Column(updatable=false)
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date createdAt;
@@ -47,32 +47,28 @@ public class Language {
 	protected void onCreate() {
 		this.createdAt = new Date();
 	}
-	
+
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date updatedAt;
-	
+
 	@PreUpdate
 	protected void onUpdate() {
 		this.updatedAt = new Date();
 	}
 
 
-//------------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------------
 // Constructors
-//------------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------------
 
-	public Language() {
+	public Song() {
 	}
 
-	public Language(String name, String creator, String version) {
+	public Song(String name, String artist, Integer rating) {
 		this.name = name;
-		this.creator = creator;
-		this.version = version;
+		this.artist = artist;
+		this.rating = rating;
 	}
-
-//------------------------------------------------------------------------------------
-//Getters and Setters
-//------------------------------------------------------------------------------------
 
 	public Long getId() {
 		return id;
@@ -90,20 +86,21 @@ public class Language {
 		this.name = name;
 	}
 
-	public String getCreator() {
-		return creator;
+	public String getArtist() {
+		return artist;
 	}
 
-	public void setCreator(String creator) {
-		this.creator = creator;
+	public void setArtist(String artist) {
+		this.artist = artist;
 	}
 
-	public String getVersion() {
-		return version;
+
+	public Integer getRating() {
+		return rating;
 	}
 
-	public void setVersion(String version) {
-		this.version = version;
+	public void setRating(Integer rating) {
+		this.rating = rating;
 	}
 
 	public Date getCreatedAt() {
@@ -122,3 +119,4 @@ public class Language {
 		this.updatedAt = updatedAt;
 	}
 }
+
