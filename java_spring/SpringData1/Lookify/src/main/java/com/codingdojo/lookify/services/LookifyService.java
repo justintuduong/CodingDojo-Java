@@ -38,7 +38,7 @@ LookifyRepository lookifyRepository;
 // Find songs by artist
 //----------------------------------------------------------------	
 	public List<Song> findSongsByArtist(String artist) {
-		System.out.println(lookifyRepository.findByArtistContaining(artist));
+//		System.out.println(lookifyRepository.findByArtistContaining(artist));
 		return lookifyRepository.findByArtistContaining(artist);
 	}
 	
