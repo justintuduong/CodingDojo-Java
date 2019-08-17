@@ -1,13 +1,14 @@
 package com.codingdojo.studentroster.services;
 
 import java.util.List;
+import java.util.Optional;
+
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.codingdojo.studentroster.models.Contact;
 import com.codingdojo.studentroster.models.Student;
-import com.codingdojo.studentroster.repositories.ContactRepository;
 import com.codingdojo.studentroster.repositories.StudentRepository;
 
 @Service
@@ -26,6 +27,10 @@ public class StudentService {
 		return studentRepository.findAll();
 	}
 	
+	public List<Student> findByDormIsNull(){
+		return studentRepository.findByDormIsNull();
+	}
+	
 
 //  ----------------------------------------------------------------
 //  create 
@@ -35,23 +40,16 @@ public class StudentService {
 		return studentRepository.save(student);
 	}
 	
-	
-//	// Find one by id
-//	public Language findLanguage(Long id) {
-//		Optional<Language> optionalLanguage = languageRepository.findById(id);
-//		if (optionalLanguage.isPresent()) {
-//			return optionalLanguage.get();
-//		} else {
-//			return null;
-//		}
-//	}
-//
-//
-//	// update
-//	public void updateLanguage(@Valid Language language) {
-//		languageRepository.save(language);
-//	}
-//	
+	// Find one by id
+	public Student findById(Long id) {
+		Optional<Student> optionalStudent = studentRepository.findById(id);
+		if (optionalStudent.isPresent()) {
+			return optionalStudent.get();
+		} else {
+			return null;
+		}
+	}
+
 //	// delete
 //	public void deleteLanguage(Long id) {
 //		languageRepository.deleteById(id);

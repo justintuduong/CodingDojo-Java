@@ -13,6 +13,8 @@ public interface StudentRepository extends CrudRepository <Student, Long>{
 	
 	   List<Student> findAll();
 
-	    void deleteById(Long id);
+	   void deleteById(Long id);
+	    
+	   List<Student> findByDormIsNull();
 
 }

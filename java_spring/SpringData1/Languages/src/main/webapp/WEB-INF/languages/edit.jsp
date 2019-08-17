@@ -12,8 +12,7 @@
 
 	<div class="container">
 		<h3>New Language</h3>
-		<form:form action="/languages/${language.id}" method="post"
-			modelAttribute="language">
+		<form:form action="/languages/${language.id}" method="post" modelAttribute="language">
 			<input type="hidden" name="_method" value="put"> 
 			<p>
 				<form:label path="name">Name</form:label>
