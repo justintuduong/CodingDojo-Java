@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Students</title>
+<title>Show Class Details</title>
 
 <!-- BootStrap CSS -->
 <link rel="stylesheet"
@@ -32,37 +32,34 @@
 
 </head>
 <body>
-	<div class="container-fluid">
-		<h1>All Students</h1>
-		<a href="/students/new">Add Student</a>
-		<a href="/contacts/new">Add Contact</a>
-		<a href="/dorms/new">Add Dorm</a>
-		<a href="/courses/new">Add Course</a>
-		
-		<table class="table mt-5">
-			<thead>
-				<tr>
-					<th scope="col">Name</th>
-					<th scope="col">Age</th>
-					<th scope="col">Address</th>
-					<th scope="col">City</th>
-					<th scope="col">State</th>
-				</tr>
-			</thead>
-			<tbody>
-				<c:forEach items="${students}" var="student">
+	<div class="container">
+		<h1>${course.name}</h1>
+		<div class="container-fluid">
+			<table class="table mt-5">
+				<thead>
 					<tr>
-						<td><a href="/students/${student.id}"><c:out value="${student.first_name} ${student.last_name}" /></a></td>
-						<td><c:out value="${student.age}" /></td>
-						<td><c:out value="${student.contact.address}" /></td>
-						<td><c:out value="${student.contact.city}" /></td>
-						<td><c:out value="${student.contact.state}" /></td>
+						<th scope="col">Name</th>
+						<th scope="col">Action</th>
 					</tr>
-				</c:forEach>
-			</tbody>
-		</table>
-
-
+				</thead>
+				<tbody>
+					<c:forEach items="${course.students}" var="student">
+						<tr>
+							<td><a href="/courses/${student.id}">${student.first_name}
+									${student.last_name}</a></td>
+							<td>
+								<form action="/students/${student.id}/delete" method="get">
+									<input type="hidden" name="student_id" value="${student.id}" />
+									<input type="text" name="course_id" value="${course.id}" /> <input
+										type="submit" class="btn btn-link" value="Delete" />
+								</form>
+							</td>
+						</tr>
+					</c:forEach>
+				</tbody>
+			</table>
+		</div>
 	</div>
+
 </body>
 </html>

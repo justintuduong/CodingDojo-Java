@@ -8,13 +8,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import com.codingdojo.studentroster.models.Course;
+import com.codingdojo.studentroster.models.CourseStudent;
+import com.codingdojo.studentroster.models.Dorm;
 import com.codingdojo.studentroster.models.Student;
 import com.codingdojo.studentroster.services.ContactService;
+import com.codingdojo.studentroster.services.CourseService;
+import com.codingdojo.studentroster.services.CourseStudentService;
+import com.codingdojo.studentroster.services.DormService;
 import com.codingdojo.studentroster.services.StudentService;
 
 @Controller
@@ -26,6 +35,18 @@ public class StudentController {
 
 	@Autowired
 	ContactService contactService;
+
+	@Autowired
+	CourseService courseService;
+
+	@Autowired
+	DormService dormService;
+
+	@Autowired
+	CourseStudentService courseStudentService;
+
+//	@Autowrired
+//	Courses_Students
 
 //----------------------------------------------------------------
 //find all
@@ -61,49 +82,46 @@ public class StudentController {
 		}
 	}
 
-////----------------------------------------------------------------
-////find one by id
-////----------------------------------------------------------------
-//
-//@GetMapping("/{id}")
-//public String show(Model model, @PathVariable("id") Long language_id) {
-//	Language language = languageService.findLanguage(language_id);
-//	model.addAttribute("language", language);
-//	return "/languages/show.jsp";
-//}
+//----------------------------------------------------------------
+//render add students to course page 
+//----------------------------------------------------------------
 
-//
-////----------------------------------------------------------------
-////render edit page
-////----------------------------------------------------------------
-//
-//@GetMapping("/{id}/edit")
-//public String edit(@PathVariable("id") Long id, Model model) {
-//	Language language = languageService.findLanguage(id);
-//	model.addAttribute("language", language);
-//	return "/languages/edit.jsp";
-//}
-//
-////----------------------------------------------------------------
-////process edit
-////----------------------------------------------------------------
-//@PutMapping("/{id}")
-//public String update(@Valid @ModelAttribute("language") Language language, BindingResult result) {
-//	if (result.hasErrors()) {
-//		return "/languages/edit.jsp";
-//	} else {
-//		languageService.updateLanguage(language);
-//		return "redirect:/languages";
-//	}
-//}
-//
-////----------------------------------------------------------------
-////process delete
-////----------------------------------------------------------------
-//@DeleteMapping("/{id}/delete")
-//public String destroy(@PathVariable("id") Long id) {
-//	languageService.deleteLanguage(id);
-//	return "redirect:/languages";
-//}
+	@GetMapping("/{id}")
+	public String show(Model model, @PathVariable("id") Long student_id) {
+
+		model.addAttribute("middleTable", new CourseStudent());
+		
+		List<Course> courses = courseService.findAll();
+		model.addAttribute("courses", courses);
+
+		Student student = studentService.findById(student_id);
+		model.addAttribute("student", student);
+
+		return "/students/show.jsp";
+	}
+
+//----------------------------------------------------------------
+//process add students to course page 
+//----------------------------------------------------------------
+	
+	@PostMapping("/{id}/process")
+	public String addClass(Model model, @PathVariable("id") Long student_id, @RequestParam("course_id") Long course_id) {
+		Course course = courseService.findById(course_id);
+		Student student = studentService.findById(student_id);
+		CourseStudent cs = new CourseStudent (course, student);
+		courseStudentService.createRelationship(cs);
+		System.out.println("controller");
+		return "redirect:/students/" + student_id;
+	}
+	
+//----------------------------------------------------------------
+// Delete class from student
+//----------------------------------------------------------------	
+	
+	@GetMapping("/{id}/delete")
+	public String removeStudent(@PathVariable("id") Long course_id, @RequestParam("student_id")Long student_id) {
+		studentService.removeCourse(student_id, course_id);
+		return "redirect:/students/" + student_id; 
+	}
 
 }
