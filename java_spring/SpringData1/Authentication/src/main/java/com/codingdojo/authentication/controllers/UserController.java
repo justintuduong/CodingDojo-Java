@@ -14,12 +14,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.codingdojo.authentication.models.User;
 import com.codingdojo.authentication.services.UserService;
+import com.codingdojo.authentication.validator.UserValidator;
 
 @Controller
 
 public class UserController {
 	@Autowired
-	UserService userService;
+	private UserService userService;
+	
+	@Autowired
+	private UserValidator userValidator;
 
 	@GetMapping("/registration")
 	public String registerForm(@ModelAttribute("user") User user) {
@@ -28,11 +32,12 @@ public class UserController {
 
 	@PostMapping(value = "/registration")
 	public String registerUser(@Valid @ModelAttribute("user") User user, BindingResult result, HttpSession session) {
+		userValidator.validate(user, result);
 		if (result.hasErrors()) {
-			return "/registration";
+			return "/LogAndReg/registrationPage.jsp";
 		} else {
-			userService.registerUser(user);
-			session.setAttribute("user_id", user.getId());
+			User u = userService.registerUser(user);
+			session.setAttribute("user_id", u.getId());
 			return "redirect:/home";
 		}
 	}
@@ -51,7 +56,8 @@ public class UserController {
 			session.setAttribute("user_id", user.getId());
 			return "redirect:/home";
 		} else {
-			return "redirect:/login";
+			model.addAttribute("error", "Invalid credentials.");
+			return "/LogAndReg/loginPage.jsp";
 		}
 
 	}
