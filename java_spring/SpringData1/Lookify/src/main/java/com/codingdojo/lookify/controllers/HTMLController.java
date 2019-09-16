@@ -16,7 +16,7 @@ public class HTMLController {
 	
 	@GetMapping("/")
 	public String index() {
-		return "/index.jsp";
+		return "/index.html";
 	}
 
 }

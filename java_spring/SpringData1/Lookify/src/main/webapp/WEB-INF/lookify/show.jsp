@@ -38,7 +38,8 @@
 		<p class="h4">Title: <c:out value="${song.name}" /></p>
 		<p class="h4">Artist Name: <c:out value="${song.artist}" /></p>
 		<p class="h4">Rating (1-10): <c:out value="${song.rating}" /></p>
-<%-- 		<a href="/languages/${song.id}/edit">Edit Song</a> --%>		<form action="/languages/${song.id}" method="post">
+<%-- 		<a href="/languages/${song.id}/edit">Edit Song</a> --%>		
+		<form action="/languages/${song.id}" method="post">
 			<input type="hidden" name="_method" value="delete"> 
 			<input type="submit" value="Delete" class="btn btn-link">
 		</form>

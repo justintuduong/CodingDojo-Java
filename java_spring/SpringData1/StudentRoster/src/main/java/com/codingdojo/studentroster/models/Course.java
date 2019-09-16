@@ -35,7 +35,6 @@ public class Course {
 	@Size(min = 2, max = 20, message = "Requires at least 2 characters")
 	private String name;
 
-	
 	// ------------------------------------------------------------------------------------
 	// many to many Relationships
 	// ------------------------------------------------------------------------------------

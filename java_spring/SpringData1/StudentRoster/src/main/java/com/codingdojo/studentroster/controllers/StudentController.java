@@ -45,7 +45,7 @@ public class StudentController {
 	@Autowired
 	CourseStudentService courseStudentService;
 
-//	@Autowrired
+//	@Autowired
 //	Courses_Students
 
 //----------------------------------------------------------------

@@ -32,9 +32,7 @@
 
 			<input type="submit" value="Submit" />
 		</form:form>
-
 	</div>
-	
 	<a href="/languages">Dashboard</a>
 
 </body>
